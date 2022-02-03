@@ -75,6 +75,7 @@ namespace Мини_игра
             Console.SetCursorPosition(0, 0);
             Random();
             Print();
+            scr.Print_Score();
             do
             {
                 key = Console.ReadKey();
@@ -90,13 +91,19 @@ namespace Мини_игра
                         walls[y, x] = "+";
                         walls[y + 1, x] = "0";
                         Print();
-                        if (all == end) break;
+                        scr.Print_Score();
+                        if (all == end)
+                        {
+                            scr.Win();
+                            break;
+                        }
                     }
                     else
                     {
                         walls[y, x] = "+";
                         walls[y + 1, x] = "0";
                         Print();
+                        scr.Print_Score();
                     }
                 }
                 else if (key.Key == ConsoleKey.DownArrow)
@@ -107,16 +114,23 @@ namespace Мини_игра
                     else if (Convert.ToInt32(walls[y, x]) > 0)
                     {
                         all += Convert.ToInt32(walls[y, x]);
+                        scr.Pered += Convert.ToInt32(walls[y, x]);
                         walls[y, x] = "+";
                         walls[y - 1, x] = "0";
                         Print();
-                        if (all == end) break;
+                        scr.Print_Score();
+                        if (all == end)
+                        {
+                            scr.Win();
+                            break;
+                        }
                     }
                     else
                     {
                         walls[y, x] = "+";
                         walls[y - 1, x] = "0";
                         Print();
+                        scr.Print_Score();
                     }
                 }
                 else if (key.Key == ConsoleKey.LeftArrow)
@@ -127,16 +141,23 @@ namespace Мини_игра
                     else if (Convert.ToInt32(walls[y, x]) > 0)
                     {
                         all += Convert.ToInt32(walls[y, x]);
+                        scr.Pered += Convert.ToInt32(walls[y, x]);
                         walls[y, x] = "+";
                         walls[y, x + 1] = "0";
                         Print();
-                        if (all == end) break;                    
+                        scr.Print_Score();
+                        if (all == end)
+                        {
+                            scr.Win();
+                            break;
+                        }
                     }
                     else
                     {
                         walls[y, x] = "+";
                         walls[y, x + 1] = "0";
                         Print();
+                        scr.Print_Score();
                     }
                 }
                 else if (key.Key == ConsoleKey.RightArrow)
@@ -147,16 +168,23 @@ namespace Мини_игра
                     else if (Convert.ToInt32(walls[y, x]) > 0)
                     {
                         all += Convert.ToInt32(walls[y, x]);
+                        scr.Pered += Convert.ToInt32(walls[y, x]);
                         walls[y, x] = "+";
                         walls[y, x - 1] = "0";
                         Print();
-                        if (all == end) break;
+                        scr.Print_Score();
+                        if (all == end)
+                        {
+                            scr.Win();
+                            break;
+                        }
                     }
                     else
                     {
                         walls[y, x] = "+";
                         walls[y, x - 1] = "0";
                         Print();
+                        scr.Print_Score();
                     }
                 }
             } while (key.Key != ConsoleKey.Enter);
