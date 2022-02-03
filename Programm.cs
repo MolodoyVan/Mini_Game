@@ -6,12 +6,13 @@ namespace Мини_игра
     {
         static void Main(string[] args)
         {
-            Dungeon1 dun = new Dungeon1();
+            Dungeon1 dun1 = new Dungeon1();
+            Dungeon2 dun2 = new Dungeon2();
             Walking wal = new Walking();
 
             int x = 12;
             string[,] w = new string[x, x];
-            w = dun.Peredacha();
+            w = dun1.Peredacha();
             wal.Vvod = w;
             wal.Pohod();
 
