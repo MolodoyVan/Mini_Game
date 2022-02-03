@@ -100,14 +100,15 @@ namespace Мини_игра
                         walls[y + 1, x] = "0";
                         Print();
                         scr.Print_Score();
-
+                        if (all == end) scr.Key(); 
                     }
                     else
                     {
                         walls[y, x] = "+";
                         walls[y + 1, x] = "0";
                         Print();
-                        scr.Print_Score();
+                        if (all == end) scr.Key();
+                        else scr.Print_Score();
                     }
                 }
                 else if (key.Key == ConsoleKey.DownArrow)
@@ -134,14 +135,15 @@ namespace Мини_игра
                         walls[y - 1, x] = "0";
                         Print();
                         scr.Print_Score();
-                       
+                        if (all == end) scr.Key();
                     }
                     else
                     {
                         walls[y, x] = "+";
                         walls[y - 1, x] = "0";
                         Print();
-                        scr.Print_Score();
+                        if (all == end) scr.Key();
+                        else scr.Print_Score();
                     }
                 }
                 else if (key.Key == ConsoleKey.LeftArrow)
@@ -168,14 +170,15 @@ namespace Мини_игра
                         walls[y, x + 1] = "0";
                         Print();
                         scr.Print_Score();
-                        
+                        if (all == end) scr.Key();
                     }
                     else
                     {
                         walls[y, x] = "+";
                         walls[y, x + 1] = "0";
                         Print();
-                        scr.Print_Score();
+                        if (all == end) scr.Key();
+                        else scr.Print_Score();
                     }
                 }
                 else if (key.Key == ConsoleKey.RightArrow)
@@ -202,14 +205,15 @@ namespace Мини_игра
                         walls[y, x - 1] = "0";
                         Print();
                         scr.Print_Score();
-                        
+                        if (all == end) scr.Key();
                     }
                     else
                     {
                         walls[y, x] = "+";
                         walls[y, x - 1] = "0";
                         Print();
-                        scr.Print_Score();
+                        if (all == end) scr.Key(); 
+                        else scr.Print_Score();
                     }
                 }
             } while (key.Key != ConsoleKey.Enter);
