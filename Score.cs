@@ -22,10 +22,10 @@ namespace Мини_игра
             Console.WriteLine($"Количество очков - {x}");
         }
 
-        public void Win()
+        public void Key()
         {
             Console.SetCursorPosition(0, 13);
-            Console.WriteLine($"Вы победили!                                          "); //Колхоз, но шо поделать
+            Console.WriteLine($"Ключ собран, дверь в следующее подземелье открыта!");
         }
     }
 }
