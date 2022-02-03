@@ -21,6 +21,7 @@ namespace Мини_игра
         int score;
         int all;
         int end;
+        bool the_end = false;
 
         public Walking()
         {
@@ -56,10 +57,7 @@ namespace Мини_игра
                     end += score;
                 }
             }
-            
-
         }
-
         private void Print()
         {
             for (int i = 0; i < xy; i++)
@@ -69,7 +67,6 @@ namespace Мини_игра
                 Console.WriteLine();
             }
         }
-
         public void Pohod()
         {
             Console.SetCursorPosition(0, 0);
@@ -84,7 +81,18 @@ namespace Мини_игра
                     Console.SetCursorPosition(0, 0);
                     y -= 1;
                     if (walls[y, x] == "|" || walls[y, x] == "-") y += 1;
-                    else if(Convert.ToInt32(walls[y, x]) > 0)
+                    else if (walls[y, x] == "=" && all != end)
+                    {
+                        Console.SetCursorPosition(0, 12);
+                        Console.WriteLine("У вас не достаточно очков");
+                        y += 1;
+                    }
+                    else if (walls[y, x] == "=" && all == end)
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else if (Convert.ToInt32(walls[y, x]) > 0)
                     {
                         all += Convert.ToInt32(walls[y, x]);
                         scr.Pered += Convert.ToInt32(walls[y, x]);
@@ -92,11 +100,7 @@ namespace Мини_игра
                         walls[y + 1, x] = "0";
                         Print();
                         scr.Print_Score();
-                        if (all == end)
-                        {
-                            scr.Win();
-                            break;
-                        }
+
                     }
                     else
                     {
@@ -111,6 +115,17 @@ namespace Мини_игра
                     Console.SetCursorPosition(0, 0);
                     y += 1;
                     if (walls[y, x] == "|" || walls[y, x] == "-") y -= 1;
+                    else if (walls[y, x] == "=" && all != end)
+                    {
+                        Console.SetCursorPosition(0, 12);
+                        Console.WriteLine("У вас не достаточно очков");
+                        y -= 1;
+                    }
+                    else if (walls[y, x] == "=" && all == end)
+                    {
+                        Console.Clear();
+                        break;
+                    }
                     else if (Convert.ToInt32(walls[y, x]) > 0)
                     {
                         all += Convert.ToInt32(walls[y, x]);
@@ -119,11 +134,7 @@ namespace Мини_игра
                         walls[y - 1, x] = "0";
                         Print();
                         scr.Print_Score();
-                        if (all == end)
-                        {
-                            scr.Win();
-                            break;
-                        }
+                       
                     }
                     else
                     {
@@ -138,6 +149,17 @@ namespace Мини_игра
                     Console.SetCursorPosition(0, 0);
                     x -= 1;
                     if (walls[y, x] == "|" || walls[y, x] == "-") x += 1;
+                    else if (walls[y, x] == "=" && all != end)
+                    {
+                        Console.SetCursorPosition(0, 12);
+                        Console.WriteLine("У вас не достаточно очков");
+                        x += 1;
+                    }
+                    else if (walls[y, x] == "=" && all == end)
+                    {
+                        Console.Clear();
+                        break;
+                    }
                     else if (Convert.ToInt32(walls[y, x]) > 0)
                     {
                         all += Convert.ToInt32(walls[y, x]);
@@ -146,11 +168,7 @@ namespace Мини_игра
                         walls[y, x + 1] = "0";
                         Print();
                         scr.Print_Score();
-                        if (all == end)
-                        {
-                            scr.Win();
-                            break;
-                        }
+                        
                     }
                     else
                     {
@@ -165,6 +183,17 @@ namespace Мини_игра
                     Console.SetCursorPosition(0, 0);
                     x += 1;
                     if (walls[y, x] == "|" || walls[y, x] == "-") x -= 1;
+                    else if (walls[y, x] == "=" && all != end)
+                    {
+                        Console.SetCursorPosition(0, 12);
+                        Console.WriteLine("У вас не достаточно очков");
+                        x -= 1;
+                    }
+                    else if (walls[y, x] == "=" && all == end)
+                    {
+                        Console.Clear();
+                        break;
+                    }
                     else if (Convert.ToInt32(walls[y, x]) > 0)
                     {
                         all += Convert.ToInt32(walls[y, x]);
@@ -173,11 +202,7 @@ namespace Мини_игра
                         walls[y, x - 1] = "0";
                         Print();
                         scr.Print_Score();
-                        if (all == end)
-                        {
-                            scr.Win();
-                            break;
-                        }
+                        
                     }
                     else
                     {
@@ -189,5 +214,7 @@ namespace Мини_игра
                 }
             } while (key.Key != ConsoleKey.Enter);
         }
+
+
     }
 }
