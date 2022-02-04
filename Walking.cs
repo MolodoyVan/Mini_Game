@@ -171,8 +171,8 @@ namespace Мини_игра
                             }
                             walls[4, 5] = " ";
                             walls[6, 5] = " ";
-                            Console.SetCursorPosition(0, 0);
                             scr.Final_Boss();
+                            Console.SetCursorPosition(0, 0);
                             Print();
                         }
                     }
