@@ -11,17 +11,14 @@ namespace Мини_игра
         Random rand = new Random();
         Score scr = new Score();
         ConsoleKeyInfo key;
+
         string[,] walls;
+        int score, all, fir, sec, rn;
         int xy = 12;
         int x = 1;
         int y = 1;
-        int fir;
-        int sec;
-        int rn;
-        int score;
-        int all;
-        int end;
-        bool the_end = false;
+        int end = 0;
+        bool prov = false;
 
         public Walking()
         {
@@ -30,34 +27,16 @@ namespace Мини_игра
 
         public string[,] Vvod
         {
-            get
-            {
-                return this.walls;
-            }
-            set
-            {
-                this.walls = value;
-            }
+            get { return this.walls; }
+            set { walls = value; }
         }
 
-
-        private void Random()
+        public bool Proverka
         {
-            rn = rand.Next(1, 8);
-            while(rn != 0)
-            {
-                score = rand.Next(1, 8);
-                fir = rand.Next(1, 10);
-                sec = rand.Next(1, 10);
-                if (walls[fir, sec] != "0") continue;
-                else
-                {
-                    walls[fir, sec] = Convert.ToString(score);
-                    rn -= 1;
-                    end += score;
-                }
-            }
+            get { return prov; }
+            set { prov = value; }
         }
+        
         private void Print()
         {
             for (int i = 0; i < xy; i++)
@@ -67,10 +46,33 @@ namespace Мини_игра
                 Console.WriteLine();
             }
         }
+
+        private void Random()
+        {
+            rn = rand.Next(1, 8);
+            while (rn != 0)
+            {
+                score = rand.Next(1, 8);
+                fir = rand.Next(1, 10);
+                sec = rand.Next(1, 10);
+                if (walls[fir, sec] != " ") continue;
+                else
+                {
+                    walls[fir, sec] = Convert.ToString(score);
+                    rn -= 1;
+                    end += score;
+                }
+            }
+        }
         public void Pohod()
         {
-            Console.SetCursorPosition(0, 0);
             Random();
+            Console.SetCursorPosition(0, 0);
+            if (prov == true)
+            {
+                x = 1;
+                y = 1;
+            } 
             Print();
             scr.Print_Score();
             do
@@ -92,22 +94,41 @@ namespace Мини_игра
                         Console.Clear();
                         break;
                     }
-                    else if (Convert.ToInt32(walls[y, x]) > 0)
+                    else if (walls[y, x] == "*")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else if (walls[y, x] != " " && Convert.ToInt32(walls[y, x]) > 0)
                     {
                         all += Convert.ToInt32(walls[y, x]);
                         scr.Pered += Convert.ToInt32(walls[y, x]);
                         walls[y, x] = "+";
-                        walls[y + 1, x] = "0";
+                        walls[y + 1, x] = " ";
                         Print();
                         scr.Print_Score();
-                        if (all == end) scr.Key(); 
+                        if (all == end) scr.Key();
+                        if (all == end && prov == true)
+                        {
+                            for (int i = 4; i <= 6; i++)
+                            {
+                                walls[i, 4] = " ";
+                                walls[i, 6] = " ";
+                            }
+                            walls[4, 5] = " ";
+                            walls[6, 5] = " ";
+                            scr.Final_Boss();
+                            Console.SetCursorPosition(0, 0);
+                            Print();
+                        }
                     }
                     else
                     {
                         walls[y, x] = "+";
-                        walls[y + 1, x] = "0";
+                        walls[y + 1, x] = " ";
                         Print();
-                        if (all == end) scr.Key();
+                        if (all == end && prov != true) scr.Key();
+                        else if (all == end && prov == true) scr.Final_Boss();
                         else scr.Print_Score();
                     }
                 }
@@ -127,22 +148,41 @@ namespace Мини_игра
                         Console.Clear();
                         break;
                     }
-                    else if (Convert.ToInt32(walls[y, x]) > 0)
+                    else if (walls[y, x] == "*")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else if (walls[y, x] != " " && Convert.ToInt32(walls[y, x]) > 0)
                     {
                         all += Convert.ToInt32(walls[y, x]);
                         scr.Pered += Convert.ToInt32(walls[y, x]);
                         walls[y, x] = "+";
-                        walls[y - 1, x] = "0";
+                        walls[y - 1, x] = " ";
                         Print();
                         scr.Print_Score();
                         if (all == end) scr.Key();
+                        if (all == end && prov == true)
+                        {
+                            for (int i = 4; i <= 6; i++)
+                            {
+                                walls[i, 4] = " ";
+                                walls[i, 6] = " ";
+                            }
+                            walls[4, 5] = " ";
+                            walls[6, 5] = " ";
+                            Console.SetCursorPosition(0, 0);
+                            scr.Final_Boss();
+                            Print();
+                        }
                     }
                     else
                     {
                         walls[y, x] = "+";
-                        walls[y - 1, x] = "0";
+                        walls[y - 1, x] = " ";
                         Print();
-                        if (all == end) scr.Key();
+                        if (all == end && prov != true) scr.Key();
+                        else if (all == end && prov == true) scr.Final_Boss();
                         else scr.Print_Score();
                     }
                 }
@@ -162,22 +202,41 @@ namespace Мини_игра
                         Console.Clear();
                         break;
                     }
-                    else if (Convert.ToInt32(walls[y, x]) > 0)
+                    else if (walls[y, x] == "*")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else if (walls[y, x] != " " && Convert.ToInt32(walls[y, x]) > 0)
                     {
                         all += Convert.ToInt32(walls[y, x]);
                         scr.Pered += Convert.ToInt32(walls[y, x]);
                         walls[y, x] = "+";
-                        walls[y, x + 1] = "0";
+                        walls[y, x + 1] = " ";
                         Print();
                         scr.Print_Score();
                         if (all == end) scr.Key();
+                        if (all == end && prov == true)
+                        {
+                            for (int i = 4; i <= 6; i++)
+                            {
+                                walls[i, 4] = " ";
+                                walls[i, 6] = " ";
+                            }
+                            walls[4, 5] = " ";
+                            walls[6, 5] = " ";
+                            scr.Final_Boss();
+                            Console.SetCursorPosition(0, 0);
+                            Print();
+                        }
                     }
                     else
                     {
                         walls[y, x] = "+";
-                        walls[y, x + 1] = "0";
+                        walls[y, x + 1] = " ";
                         Print();
-                        if (all == end) scr.Key();
+                        if (all == end && prov != true) scr.Key();
+                        else if (all == end && prov == true) scr.Final_Boss();
                         else scr.Print_Score();
                     }
                 }
@@ -197,28 +256,45 @@ namespace Мини_игра
                         Console.Clear();
                         break;
                     }
-                    else if (Convert.ToInt32(walls[y, x]) > 0)
+                    else if (walls[y, x] == "*")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else if (walls[y, x] != " " && Convert.ToInt32(walls[y, x]) > 0)
                     {
                         all += Convert.ToInt32(walls[y, x]);
                         scr.Pered += Convert.ToInt32(walls[y, x]);
                         walls[y, x] = "+";
-                        walls[y, x - 1] = "0";
+                        walls[y, x - 1] = " ";
                         Print();
                         scr.Print_Score();
                         if (all == end) scr.Key();
+                        if (all == end && prov == true)
+                        {
+                            for (int i = 4; i <= 6; i++)
+                            {
+                                walls[i, 4] = " ";
+                                walls[i, 6] = " ";
+                            }
+                            walls[4, 5] = " ";
+                            walls[6, 5] = " ";
+                            scr.Final_Boss();
+                            Console.SetCursorPosition(0, 0);
+                            Print();
+                        }
                     }
                     else
                     {
                         walls[y, x] = "+";
-                        walls[y, x - 1] = "0";
+                        walls[y, x - 1] = " ";
                         Print();
-                        if (all == end) scr.Key(); 
+                        if (all == end && prov != true) scr.Key();
+                        else if (all == end && prov == true) scr.Final_Boss();
                         else scr.Print_Score();
                     }
                 }
             } while (key.Key != ConsoleKey.Enter);
         }
-
-
     }
 }
