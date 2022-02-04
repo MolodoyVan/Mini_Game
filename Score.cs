@@ -24,8 +24,14 @@ namespace Мини_игра
 
         public void Key()
         {
-            Console.SetCursorPosition(0, 13);
-            Console.WriteLine($"Ключ собран, дверь в следующее подземелье открыта!");
+            Console.SetCursorPosition(0, 12);
+            Console.WriteLine($"                                           \nКлюч собран, дверь в следующее подземелье открыта!");
+        }
+
+        public void Final_Boss()
+        {
+            Console.SetCursorPosition(0, 12);
+            Console.WriteLine($"                                           \nБосс ждёт вас!                                       ");
         }
     }
 }
