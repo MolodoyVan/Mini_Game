@@ -11,9 +11,14 @@ namespace Мини_игра
             Walking wal = new Walking();
 
             int x = 12;
+            bool IsTrue = true;
             string[,] w = new string[x, x];
             w = dun1.Peredacha();
             wal.Vvod = w;
+            wal.Pohod();
+            w = dun2.Peredacha();
+            wal.Vvod = w;
+            wal.Proverka = IsTrue;
             wal.Pohod();
 
             //Console.WriteLine("Hello, Server!");
