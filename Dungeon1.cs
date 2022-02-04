@@ -8,7 +8,6 @@ namespace Мини_игра
 {
     class Dungeon1
     {
-        Walking wall = new Walking();
         string[,] walls;
         int x = 12;
 
@@ -16,6 +15,7 @@ namespace Мини_игра
         {
             walls = new string[x, x];
         }
+        
 
         private void Steni()
         {
@@ -52,23 +52,24 @@ namespace Мини_игра
 
             for (int i = 1; i < 6; i++)
                 for (int j = 1; j < 4; j++)
-                    walls[i, j] = "0";
-            walls[3, 4] = "0";
-            walls[4, 4] = "0";
-            walls[5, 4] = "0";
+                    walls[i, j] = " ";
+            walls[3, 4] = " ";
+            walls[4, 4] = " ";
+            walls[5, 4] = " "; //Так надо
             for (int i = 3; i < x-1; i++)
                 for (int j = 5; j < x-1; j++)
-                    walls[i, j] = "0";
+                    walls[i, j] = " ";
 
             for (int i = 0; i < x; i++)
                 for (int j = 0; j < x; j++)
                     if (walls[i, j] == null) walls[i, j] = ":";
             walls[0, 0] = "|";
             walls[0, 4] = "|";
-            walls[6, 0] = "|";
+            walls[6, 0] = "|";  //ДА, и так тоже
             walls[6, 4] = "|";
             walls[2, 11] = "|";
             walls[11, 11] = "|";
+            walls[11, 8] = "=";
         }
 
         public string[,] Peredacha()
